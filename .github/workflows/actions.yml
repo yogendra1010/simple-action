@@ -1,11 +1,16 @@
-name: Simple workflow
-on: workflow_dispatch
+name: Simple Workflow
+on: push
 jobs:
-  first-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print greeting
-        run: echo "Hello!"
-      - name: Print goodbye
-        run: echo "Goodbye!"
-      
+    test:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Get code
+          uses: actions/checkout@v3
+        - name: Install NodeJS  # Altough ubuntu-latest runner comes with preinstalled many runtime including node js. If any other version of node js needed then we can install by mentioning specific version
+          uses: actions/setup-node@v3
+          with:
+            node-version: 18
+        - name: Install dependencies
+          run: npm ci
+        - name: Run test
+          run: npm test
