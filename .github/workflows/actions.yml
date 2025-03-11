@@ -1,5 +1,12 @@
 name: Simple Workflow
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+  workflow_dispatch:
 jobs:
     test:
       runs-on: ubuntu-latest
